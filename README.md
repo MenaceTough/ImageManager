@@ -1,2 +1,2 @@
-just run .exe OR application.App in the the development environment.
+just run application.App in the the development environment.
 
