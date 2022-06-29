@@ -1,4 +1,4 @@
-package application.menu;
+package application.filter;
 
 import javafx.scene.image.*;
 import javafx.scene.paint.Color;
@@ -7,59 +7,47 @@ public class FilterHelper {
     /**
      * Матрицы фильтрации.
      */
-    private static final double[][] FILTER_SCHARR_MX = {{3.0, 0, -3.0}, {10.0, 0, -10.0}, {3.0, 0, -3.0}};
-    private static final double[][] FILTER_SCHARR_MY = {{3.0, 10.0, 3.0}, {0, 0, 0}, {-3.0, -10.0, -3.0}};
-    private static final double[][] FILTER_SOBEL_MX = {{1.0, 0, -1.0}, {2.0, 0, -2.0}, {1.0, 0, -1.0}};
-    private static final double[][] FILTER_SOBEL_MY = {{-1.0, -2.0, -1.0}, {0, 0, 0}, {1.0, 2.0, 1.0}};
-    private static final double[][] FILTER_PREWITT_MX = {{1.0, 0, -1.0}, {1.0, 0, -1.0}, {1.0, 0, -1.0}};
-    private static final double[][] FILTER_PRRWITT_MY = {{-1.0, -1.0, -1.0}, {0, 0, 0}, {1.0, 1.0, 1.0}};
+    public static final double[][] FILTER_SCHARR_MX = {{3.0, 0, -3.0}, {10.0, 0, -10.0}, {3.0, 0, -3.0}};
+    public static final double[][] FILTER_SCHARR_MY = {{3.0, 10.0, 3.0}, {0, 0, 0}, {-3.0, -10.0, -3.0}};
+    public static final double[][] FILTER_SOBEL_MX = {{1.0, 0, -1.0}, {2.0, 0, -2.0}, {1.0, 0, -1.0}};
+    public static final double[][] FILTER_SOBEL_MY = {{-1.0, -2.0, -1.0}, {0, 0, 0}, {1.0, 2.0, 1.0}};
+    public static final double[][] FILTER_PREWITT_MX = {{1.0, 0, -1.0}, {1.0, 0, -1.0}, {1.0, 0, -1.0}};
+    public static final double[][] FILTER_PRRWITT_MY = {{-1.0, -1.0, -1.0}, {0, 0, 0}, {1.0, 1.0, 1.0}};
 
     /**
-     * Применение фильтра ScharrMx.
+     * Выбора класса с реализацией фильтра изображения.
      */
-    public static void filterScharrMx(Image image, ImageView imageView) {
-        imageView.setImage(filter(FILTER_SCHARR_MX, image));
-    }
-
-    /**
-     * Применение фильтра ScharrMy.
-     */
-    public static void filterScharrMy(Image image, ImageView imageView) {
-        imageView.setImage(filter(FILTER_SCHARR_MY, image));
-    }
-
-    /**
-     * Применение фильтра SobelMx.
-     */
-    public static void filterSobelMx(Image image, ImageView imageView) {
-        imageView.setImage(filter(FILTER_SOBEL_MX, image));
-    }
-
-    /**
-     * Применение фильтра SobelMy.
-     */
-    public static void filterSobelMy(Image image, ImageView imageView) {
-        imageView.setImage(filter(FILTER_SOBEL_MY, image));
-    }
-
-    /**
-     * Применение фильтра PrewittMx.
-     */
-    public static void filterPrewittMx(Image image, ImageView imageView) {
-        imageView.setImage(filter(FILTER_PREWITT_MX, image));
-    }
-
-    /**
-     * Применение фильтра PrewittMy.
-     */
-    public static void filterPrewittMy(Image image, ImageView imageView) {
-        imageView.setImage(filter(FILTER_PRRWITT_MY, image));
+    public static Filter selectFilter(String filterName) {
+        Filter filter;
+        switch (filterName) {
+            case ("Scharr_mx"):
+                filter = new FilterScharrMx();
+                break;
+            case ("Scharr_my"):
+                filter = new FilterScharrMy();
+                break;
+            case ("Sobel_mx"):
+                filter = new FilterSobelMx();
+                break;
+            case ("Sobel_my"):
+                filter = new FilterSobelMy();
+                break;
+            case ("Prewitt_mx"):
+                filter = new FilterPrewittMx();
+                break;
+            case ("Prewitt_my"):
+                filter = new FilterPrewittMy();
+                break;
+            default:
+                throw new RuntimeException("Не найдена реализация фильтра " + filterName);
+        }
+        return filter;
     }
 
     /**
      * Вспомогательный метод для фильтров.
      */
-    private static Image filter(double[][] filter, Image image) {
+    public static Image filter(double[][] filter, Image image) {
         if (image == null)
             return null;
         // Считываем пиксели изображения.

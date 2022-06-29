@@ -1,4 +1,4 @@
-package application.menu;
+package application.contrast;
 
 import javafx.scene.control.Slider;
 import javafx.scene.effect.Lighting;
@@ -23,7 +23,7 @@ public class ContrastHelper {
     /**
      * Преобразование изображения в серый.
      */
-    public static Image grayImage(Image image, ImageView imageView) {
+    public static void grayImage(Image image, ImageView imageView) {
         WritableImage wImage = new WritableImage((int) image.getWidth(), (int) image.getHeight());
         PixelReader pixelReader = image.getPixelReader();
         PixelWriter pixelWriter = wImage.getPixelWriter();
@@ -45,7 +45,6 @@ public class ContrastHelper {
             imageView.setImage(wImage);
             image = wImage;
         }
-        return null;
     }
 
 }

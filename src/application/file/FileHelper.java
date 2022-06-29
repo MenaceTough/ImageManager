@@ -1,4 +1,4 @@
-package application.menu;
+package application.file;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

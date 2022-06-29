@@ -10,7 +10,7 @@ import java.util.*;
  * Класс хелпер для работы с меню.
  */
 public class MenuHelper {
-    private static final List<String> FILE_ELEMENTS = Arrays.asList("Select Image");
+    private static final List<String> FILE_ELEMENTS = Arrays.asList("Select image");
     private static final List<String> CONTRAST_ELEMENTS = Arrays.asList("Grayscale", "Color");
     private static final List<String> GRADIENT_ELEMENTS = Arrays.asList("Scharr_mx", "Scharr_my", "Sobel_mx", "Sobel_my", "Prewitt_mx", "Prewitt_my");
 
